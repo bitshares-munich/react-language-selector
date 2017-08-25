@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 3 core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Bootstrap 3 for IE8 -->
+    <!--[if IE 8]><link href="css/bootstrap-ie8.min.css" rel="stylesheet"><![endif]-->
+
+    <title>Demo</title>
+
+    <script src="js/react-with-addons-0.14.7.min.js"></script>
+    <script src="js/react-dom-0.14.7.min.js"></script>
+    <!-- language specific code -->
+    <script src="js/react-simplehtmlparser.min.js"></script>
+    <script src="js/react-language-selector.min.js"></script>
+    <!-- language specific code -->
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar navbar-default navbar-static-top" role="navigation">
+
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a data-timer="20" data-original-title="Demo for React Language Selector" href="#" data-toggle="tooltip" data-placement="right" class="navbar-brand">React Language Selector Demo</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right" multilinks-noscroll="true" id="langs"></ul>
+        </nav>
+    </div>
+</div>
+
+&nbsp;
+<table>
+    <tr>
+        <td class="menu" nowrap>
+            <div style="display: inline"><a href="http://kencode.de/projects" id="language1">projects</a></div>
+            &nbsp;&nbsp;&#183;&nbsp;&nbsp;
+            <div style="display: inline"><a href="http://kencode.de/contact" id="language2">contact</a></div>
+            &nbsp;
+        </td>
+
+    </tr>
+</table>
+<nobr>
+    <div style="display: inline">
+        <div id="language3">Fast Companies ♥ Decentralization</div>
+    </div>
+    <div style="display: inline"><img id="language4" src="img/flags/United-States.png" alt="EN"></div>
+</nobr>
+<br>
+<script>
+    //you can use this to load a lang pack at start
+    // var lang = new React.LS('languages/en.json', 'en_US');
+
+    //by this you simply set the default lang
+    var lang = new React.LS('en_US');
+
+    lang.ready(function () {
+        //List of languages
+        var rlsui_languages = [
+            {
+                id: 'en_US',
+                langfile: 'languages/en.json',
+                title: 'English (US)',
+                name: 'English (US)',
+                flagImg: 'img/flags/us.png',
+                flagTitle: 'United States'
+            },
+            {
+                id: 'de_DE',
+                langfile: 'languages/de.json',
+                title: 'German',
+                name: 'Deutsch',
+                flagImg: 'img/flags/de.png',
+                flagTitle: 'Germany'
+            },
+            /*
+             {
+             //id for loaded language pack also can be 'fr'
+             id: 'fr_FR',
+             //path to language pack
+             langfile: 'languages/fr.json',
+             title: 'French',
+             name: 'French',
+             flagImg: 'img/flags/fr.png',
+             flagTitle: 'French'
+             },*/
+        ];
+
+        //main part for loading language selector ui
+        ReactDOM.render(React.createElement(lang.UI, {
+            items: rlsui_languages,
+            selectedLang: window.lang.currentLang(),
+            onLanguageChanged: function (rlsui_lang) {
+                lang.set_load_lang(rlsui_lang.id, rlsui_lang.langfile);
+            }
+        }), document.getElementById('langs'));
+    });
+</script>
+<!-- Bootstrap Core JavaScript -->
+<script type="application/javascript" src="js/bootstrap-native.min.js"></script>
+</body>
+</html>
